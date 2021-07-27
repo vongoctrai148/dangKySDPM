@@ -1,0 +1,22 @@
+.history-item {
+	border: 1px ridge #D3D3D3;
+	padding:  5px;
+	margin: 5px;
+}
+.history-item h5 {
+	color: black;
+}
+.history-item p {
+	margin-left: 5%;
+}
+.history-item a {
+	display: inline;
+}
+.history-item .detail {
+	margin-left: 75%;
+	color: #090;
+}
+.history-item .report {
+	margin-left: 2%;
+	color: #c00;
+}

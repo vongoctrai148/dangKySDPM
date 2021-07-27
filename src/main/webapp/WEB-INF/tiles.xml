@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="login"
+                template="/WEB-INF/jsp/login.jsp">
+    </definition>
+    <definition name="logout"
+                template="/WEB-INF/jsp/login.jsp">
+    </definition>
+    <!-- Manager Define -->
+    <definition name="homepage-nql.definition" template="/WEB-INF/jsp/layout/nguoiquanli-layout.jsp">
+        <put-attribute name="topbar" value="/WEB-INF/jsp/topbar.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/nguoiquanli/sidebar.jsp"/>
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+
+    <!-- Activity NQL -->
+    <definition name="NQL/capnhatdkpm" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/dkpm_nql.jsp" />
+    </definition>
+    <definition name="NQL/duyetgvdk" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/duyet_GV_SV.jsp" />
+    </definition>
+    <definition name="NQL/chitietdkgv" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/chitiet_dkgv.jsp" />
+    </definition>
+    <definition name="NQL/dsachBCSV" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/dsach_baocaosv.jsp" />
+    </definition>
+    <definition name="NQL/chitietBC" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/chitiet_baocaosv.jsp" />
+    </definition>
+    <definition name="NQL/dsachBCGV" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/dsach_baocaogv.jsp" />
+    </definition>
+    <definition name="NQL/chitietBCGV" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/chitiet_baocaogv.jsp" />
+    </definition>
+    <definition name="NQL/reportTTDKGV" extends="homepage-nql.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/nguoiquanli/report_ttdkgv.jsp" />
+    </definition>
+
+    <!-- Home Page GV -->
+    <definition name="homepage-gv.definition" template="/WEB-INF/jsp/layout/giaovien-layout.jsp">
+        <put-attribute name="topbar" value="/WEB-INF/jsp/topbar.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/giaovien/sidebar.jsp"/>
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+    <!-- Activity GV -->
+    <definition name="GV/capnhatdkpm" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/dkpm_gv.jsp" />
+    </definition>
+    <definition name="GV/themdkpm" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/themdangky_gv.jsp" />
+    </definition>
+    <definition name="GV/themungdung" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/chon_ungdung.jsp" />
+    </definition>
+    <definition name="GV/suadkpm" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/suadangky_gv.jsp" />
+    </definition>
+    <definition name="GV/suaungdung" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/sua_ungdung.jsp" />
+    </definition>
+    <definition name="GV/lichsudk" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/lichsu_dk.jsp" />
+    </definition>
+    <definition name="GV/chitietlichsu" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/chitiet_lichsu.jsp" />
+    </definition>
+    <definition name="GV/baocaophong" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/baocaophong.jsp" />
+    </definition>
+    <definition name="GV/baocaomay" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/baocaomay.jsp" />
+    </definition>
+    <definition name="GV/baocaothanhcong" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/baocaothanhcong.jsp" />
+    </definition>
+    <definition name="GV/dsachphongmuon" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/dsach_phongmuon.jsp" />
+    </definition>
+    <definition name="GV/duyetsvdk" extends="homepage-gv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/giaovien/duyet_svdk.jsp" />
+    </definition>
+<!--    SinhVien-->
+    <definition name="homepage-sv.definition" template="/WEB-INF/jsp/layout/sinhvien-layout.jsp">
+        <put-attribute name="topbar" value="/WEB-INF/jsp/topbar.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/sinhvien/sidebar.jsp"/>
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+
+    <!-- Activity SV -->
+    <definition name="SV/capnhatdkpm" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/dkpm_sv.jsp" />
+    </definition>
+    <definition name="SV/themdkpm" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/themdangky_sv.jsp" />
+    </definition>
+    <definition name="SV/themungdung" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/chon_ungdung.jsp" />
+    </definition>
+    <definition name="SV/suadkpm" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/suadangky_sv.jsp" />
+    </definition>
+    <definition name="SV/suaungdung" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/sua_ungdung.jsp" />
+    </definition>
+    <definition name="SV/lichsudk" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/lichsu_dk.jsp" />
+    </definition>
+    <definition name="SV/chitietlichsu" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/chitiet_lichsu.jsp" />
+    </definition>
+    <definition name="SV/baocaomay" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/baocaomay.jsp" />
+    </definition>
+    <definition name="SV/baocaothanhcong" extends="homepage-sv.definition">
+        <put-attribute name="body" value="/WEB-INF/jsp/sinhvien/baocaothanhcong.jsp" />
+    </definition>
+</tiles-definitions>
