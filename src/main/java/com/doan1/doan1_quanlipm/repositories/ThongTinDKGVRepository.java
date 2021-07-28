@@ -5,6 +5,7 @@ import com.doan1.doan1_quanlipm.entities.ThongTinDKSV;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ThongTinDKGVRepository extends JpaRepository<ThongTinDKGV, Long> {
@@ -24,5 +25,5 @@ public interface ThongTinDKGVRepository extends JpaRepository<ThongTinDKGV, Long
     List<ThongTinDKGV> findByUsernameAndKQ(String usernamem, int ketqua);
 
     @Query("select count(tt) from ThongTinDKGV tt where tt.phongmay.maphong = ?1 and tt.ngaysd = ?2 and tt.giobatdau = ?3 and tt.ketqua = ?4")
-    int checkTTDKGV(String maphong, String ngaysd, String giobatdau, int ketqua);
+    int checkTTDKGV(String maphong, Date ngaysd, String giobatdau, int ketqua);
 }

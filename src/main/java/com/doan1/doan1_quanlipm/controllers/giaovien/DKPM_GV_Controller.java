@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -61,9 +62,8 @@ public class DKPM_GV_Controller {
         Users user = (Users) session.getAttribute("loginUser");
         PhongMay phongMay = phongMayService.findByMaPhong(request.getParameter("phongmay"));
         LopHocPhan lopHocPhan = lopHocPhanService.findByMaLHP(request.getParameter("lophocphan"));
-        String ngaysd = request.getParameter("ngaysd");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
+        Date ngaysd = Date.valueOf(request.getParameter("ngaysd"));
+        java.util.Date date = new java.util.Date();
         String start = request.getParameter("startTime");
         String end = request.getParameter("endTime");
         int soluongsv = Integer.parseInt(request.getParameter("soluongsv"));
@@ -73,12 +73,12 @@ public class DKPM_GV_Controller {
             mucdich.append(mucdichs[i]);
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
-        thongTinDKGVService.addTTDKGV(user, phongMay, lopHocPhan, dtf.format(now), ngaysd, start, end, mucdich.toString(), soluongsv, 0);
         if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, start, 1) > 0){
             model.addAttribute("message", "Phòng đã có giáo viên mượn");
             return "redirect:/GV/themdkpm";
         }
         else {
+            thongTinDKGVService.addTTDKGV(user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
             return "GV/themungdung";
         }
     }
@@ -117,9 +117,8 @@ public class DKPM_GV_Controller {
         session.setAttribute("ttdkgvid", id);
         PhongMay phongMay = phongMayService.findByMaPhong(request.getParameter("phongmay"));
         LopHocPhan lopHocPhan = lopHocPhanService.findByMaLHP(request.getParameter("lophocphan"));
-        String ngaysd = request.getParameter("ngaysd");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
+        Date ngaysd = Date.valueOf(request.getParameter("ngaysd"));
+        java.util.Date date = new java.util.Date();
         String start = request.getParameter("startTime");
         String end = request.getParameter("endTime");
         int soluongsv = Integer.parseInt(request.getParameter("soluongsv"));
@@ -129,12 +128,12 @@ public class DKPM_GV_Controller {
             mucdich.append(mucdichs[i]);
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
-        thongTinDKGVService.editTTDKGV(id, user, phongMay, lopHocPhan, dtf.format(now), ngaysd, start, end, mucdich.toString(), soluongsv, 0);
         if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, start, 1) > 0){
             model.addAttribute("message", "Phòng đã có giáo viên mượn");
             return "redirect:/GV/suadkpm/"+id;
         }
         else {
+            thongTinDKGVService.editTTDKGV(id, user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
             return "GV/suaungdung";
         }
     }

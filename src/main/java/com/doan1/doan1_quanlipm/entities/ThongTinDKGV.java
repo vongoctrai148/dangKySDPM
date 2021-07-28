@@ -38,15 +38,15 @@ public class ThongTinDKGV {
     @OneToMany(mappedBy =  "thongTinDKGV", fetch = FetchType.LAZY)
     private List<ChiTietBCMay> chiTietBCMays;
 
-    private String thoigiandk;
-    private String ngaysd;
+    private Date thoigiandk;
+    private Date ngaysd;
     private String giobatdau;
     private String gioketthuc;
     private String mucdich;
     private int soluongsv;
     private int ketqua;
 
-    public ThongTinDKGV(Users user, PhongMay phongmay, LopHocPhan lophp, String thoigiandk, String ngaysd, String giobatdau, String gioketthuc, String mucdich, int soluongsv, int ketqua) {
+    public ThongTinDKGV(Users user, PhongMay phongmay, LopHocPhan lophp, Date thoigiandk, Date ngaysd, String giobatdau, String gioketthuc, String mucdich, int soluongsv, int ketqua) {
         this.user = user;
         this.phongmay = phongmay;
         this.lophp = lophp;

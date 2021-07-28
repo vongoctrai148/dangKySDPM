@@ -23,7 +23,7 @@ public class ThongTinDKGVService {
     }
 
     @Transactional
-    public void addTTDKGV(Users user, PhongMay phongMay, LopHocPhan lopHocPhan, String thoigiandk, String ngaysd, String start, String end, String mucdich, int soluongsv, int ketqua){
+    public void addTTDKGV(Users user, PhongMay phongMay, LopHocPhan lopHocPhan, Date thoigiandk, Date ngaysd, String start, String end, String mucdich, int soluongsv, int ketqua){
         thongTinDKGVRepository.save(new ThongTinDKGV(user, phongMay, lopHocPhan, thoigiandk, ngaysd, start, end, mucdich, soluongsv, ketqua));
     }
     @Transactional
@@ -51,7 +51,7 @@ public class ThongTinDKGVService {
         return thongTinDKGVRepository.findByNQLUsernameToRP(username);
     }
     @Transactional
-    public void editTTDKGV(Long id, Users user, PhongMay phongMay, LopHocPhan lopHocPhan, String thoigiandk, String ngaysd, String start, String end, String mucdich, int soluongsv, int ketqua){
+    public void editTTDKGV(Long id, Users user, PhongMay phongMay, LopHocPhan lopHocPhan, Date thoigiandk, Date ngaysd, String start, String end, String mucdich, int soluongsv, int ketqua){
         ThongTinDKGV thongTinDKGV = thongTinDKGVRepository.findById(id).get();
         thongTinDKGV.setUser(user);
         thongTinDKGV.setPhongmay(phongMay);
@@ -71,7 +71,7 @@ public class ThongTinDKGVService {
     }
 
     @Transactional
-    public int checkTTDKGV(String maphong, String ngaysd, String start, int ketqua){
+    public int checkTTDKGV(String maphong, Date ngaysd, String start, int ketqua){
         return thongTinDKGVRepository.checkTTDKGV(maphong, ngaysd, start, ketqua);
     }
     @Transactional

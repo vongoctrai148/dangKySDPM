@@ -29,7 +29,7 @@ public class ThongTinDKSV {
     @JoinColumn(name = "mamay")
     private MayTinh mamay;
     private Date thoigiandk;
-    private String ngaysd;
+    private Date ngaysd;
     private String giobatdau;
     private String gioketthuc;
     private int ketqua;
@@ -41,7 +41,7 @@ public class ThongTinDKSV {
     @OneToMany(mappedBy = "thongtindksv", fetch = FetchType.LAZY)
     private List<ThongTinDangKyPhanMem> thongTinDangKyPhanMems;
 
-    public ThongTinDKSV(Users user, PhongMay maphong, MayTinh mamay, Date thoigiandk, String ngaysd, String giobatdau, String gioketthuc, int ketqua) {
+    public ThongTinDKSV(Users user, PhongMay maphong, MayTinh mamay, Date thoigiandk, Date ngaysd, String giobatdau, String gioketthuc, int ketqua) {
         this.user = user;
         this.maphong = maphong;
         this.mamay = mamay;

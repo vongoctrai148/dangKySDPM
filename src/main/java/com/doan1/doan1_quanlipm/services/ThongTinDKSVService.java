@@ -27,7 +27,7 @@ public class ThongTinDKSVService {
 
 
     @Transactional
-    public void themDK(Users user, PhongMay phongmay, MayTinh maytinh, Date thoigiandk,String ngaysd,
+    public void themDK(Users user, PhongMay phongmay, MayTinh maytinh, Date thoigiandk,Date ngaysd,
                        String giobatdau, String gioketthuc, int ketqua){
         thongTinDKSVRepository.save(new ThongTinDKSV(user, phongmay, maytinh, thoigiandk, ngaysd, giobatdau, gioketthuc, ketqua));
     }
@@ -46,7 +46,7 @@ public class ThongTinDKSVService {
     }
 
     @Transactional
-    public void suaDK(Long id, Users users, PhongMay phongmay, MayTinh maytinh, Date thoigiandk,String ngaysd,
+    public void suaDK(Long id, Users users, PhongMay phongmay, MayTinh maytinh, Date thoigiandk, Date ngaysd,
                               String giobatdau, String gioketthuc, int ketqua){
         ThongTinDKSV thongTinDKSV = thongTinDKSVRepository.findById(id).get();
         thongTinDKSV.setUser(users);
@@ -66,11 +66,11 @@ public class ThongTinDKSVService {
     }
 
     @Transactional
-    public int countSVMuon(String maphong, String ngaysd, String start, int ketqua){
+    public int countSVMuon(String maphong, Date ngaysd, String start, int ketqua){
         return thongTinDKSVRepository.countSVMuonPhong(maphong, ngaysd, start, ketqua);
     }
     @Transactional
-    public List<ThongTinDKSV> findSVMuonPhong(String maphong, String ngaysd, String start, int ketqua){
+    public List<ThongTinDKSV> findSVMuonPhong(String maphong, Date ngaysd, String start, int ketqua){
         return thongTinDKSVRepository.findSVMuonPhong(maphong, ngaysd, start, ketqua);
     }
     @Transactional
@@ -90,7 +90,7 @@ public class ThongTinDKSVService {
         thongTinDKSVRepository.save(thongTinDKSV);
     }
     @Transactional
-    public void aceptAll(String maphong, String ngaysd, String giobatdau, int ketqua){
+    public void aceptAll(String maphong, Date ngaysd, String giobatdau, int ketqua){
         List<ThongTinDKSV> thongTinDKSVs = thongTinDKSVRepository.findSVMuonPhong(maphong, ngaysd, giobatdau, ketqua);
         for(int i = 0; i < thongTinDKSVs.size(); i++){
             thongTinDKSVs.get(i).setKetqua(1);
@@ -106,7 +106,7 @@ public class ThongTinDKSVService {
         }
     }
     @Transactional
-    public void denytAll(String maphong, String ngaysd, String giobatdau, int ketqua){
+    public void denytAll(String maphong, Date ngaysd, String giobatdau, int ketqua){
         List<ThongTinDKSV> thongTinDKSVs = thongTinDKSVRepository.findSVMuonPhong(maphong, ngaysd, giobatdau, ketqua);
         for(int i = 0; i < thongTinDKSVs.size(); i++){
             thongTinDKSVs.get(i).setKetqua(2);

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -55,7 +55,7 @@ public class DKPM_SV_Controller {
     public String postThemDK(HttpServletRequest request, HttpSession session, Model model){
         String mamay = request.getParameter("maytinh");
         Users user = (Users) session.getAttribute("loginUser");
-        String tgiansd = request.getParameter("thoigiansd");
+        Date tgiansd = Date.valueOf(request.getParameter("thoigiansd"));
         String start = request.getParameter("startTime");
         String end = request.getParameter("endTime");
         java.util.Date date = new java.util.Date();
@@ -102,7 +102,7 @@ public class DKPM_SV_Controller {
         session.setAttribute("ttdksvid", id);
         String mamay = request.getParameter("maytinh");
         Users user = (Users) session.getAttribute("loginUser");
-        String tgiansd = request.getParameter("thoigiansd");
+        Date tgiansd = Date.valueOf(request.getParameter("thoigiansd"));
         String start = request.getParameter("startTime");
         String end = request.getParameter("endTime");
         java.util.Date date = new java.util.Date();
