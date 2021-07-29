@@ -8,8 +8,15 @@
 
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách giáo viên đăng ký mượn phòng ${loginUser.phongMay.maphong}</h6>
-        <input id="searchName" style="margin-top: 1%" type="text" class="form-control col-md-3" placeholder="Tìm kiếm tên giáo viên..." >
+
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <input id="searchName" style="margin-top: 1%" type="text" class="form-control col-md-3" placeholder="Tìm kiếm tên giáo viên..." >
+            <a href="/NQL/reportTT" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-right: 10%"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Tạo report</a>
+            ${notification}
+        </div>
     </div>
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

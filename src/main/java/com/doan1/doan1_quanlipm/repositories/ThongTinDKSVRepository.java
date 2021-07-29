@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ThongTinDKSVRepository extends JpaRepository<ThongTinDKSV, Long> {
     @Query("select tt from ThongTinDKSV tt, Users u where " +
-            "u.username = tt.user.username  and tt.user.username = ?1")
+            "u.username = tt.user.username  and tt.user.username = ?1 order by tt.thoigiandk desc ")
     List<ThongTinDKSV> findAllByUsername(String username);
     @Query("select max(tt.id) from ThongTinDKSV tt")
     Long findMaxId();

@@ -12,7 +12,7 @@ public interface ThongTinDKGVRepository extends JpaRepository<ThongTinDKGV, Long
     @Query("select max(tt.id) from ThongTinDKGV tt")
     Long findMaxId();
 
-    @Query("select tt from ThongTinDKGV tt where tt.user.username = ?1")
+    @Query("select tt from ThongTinDKGV tt where tt.user.username = ?1 order by tt.thoigiandk desc ")
     List<ThongTinDKGV> findByUsername(String username);
 
     @Query("select tt from ThongTinDKGV tt, PhongMay pm where pm.user.username = ?1 and tt.ketqua = ?2 order by tt.thoigiandk asc ")

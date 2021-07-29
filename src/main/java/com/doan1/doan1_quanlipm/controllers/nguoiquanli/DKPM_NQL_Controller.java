@@ -1,18 +1,28 @@
 package com.doan1.doan1_quanlipm.controllers.nguoiquanli;
 
+import com.doan1.doan1_quanlipm.Impl.ThongTinDKGVImpl;
 import com.doan1.doan1_quanlipm.entities.ThongTinDKGV;
 import com.doan1.doan1_quanlipm.entities.ThongTinDKSV;
 import com.doan1.doan1_quanlipm.entities.Users;
 import com.doan1.doan1_quanlipm.services.ThongTinDKGVService;
 import com.doan1.doan1_quanlipm.services.ThongTinDKSVService;
 import net.bytebuddy.asm.Advice;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.HtmlExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Controller
 public class DKPM_NQL_Controller {
@@ -20,6 +30,8 @@ public class DKPM_NQL_Controller {
     private ThongTinDKGVService thongTinDKGVService;
     @Autowired
     private ThongTinDKSVService thongTinDKSVService;
+    @Autowired
+    private ThongTinDKGVImpl thongTinDKGVImpl;
 
     @GetMapping("NQL/capnhatdkpm")
     public String getCapNhatDK(HttpSession session){
@@ -141,5 +153,19 @@ public class DKPM_NQL_Controller {
             model.addAttribute("ttdkgvs", thongTinDKGVService.findByNQLUsernameToRP(user.getUsername()));
             return "NQL/reportTTDKGV";
         }
+    }
+    @GetMapping("NQL/reportTT")
+    public String getReportTT(HttpServletResponse response, Model model) throws JRException, IOException {
+        response.setContentType("text/html");
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(thongTinDKGVImpl.report());
+        InputStream inputStream = this.getClass().getResourceAsStream("/report.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+        HtmlExporter exporter = new HtmlExporter(DefaultJasperReportsContext.getInstance());
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter.setExporterOutput(new SimpleHtmlExporterOutput(response.getWriter()));
+        exporter.exportReport();
+        model.addAttribute("notification", "Report Successfully");
+        return "redirect:/NQL/reportTTDKGV";
     }
 }

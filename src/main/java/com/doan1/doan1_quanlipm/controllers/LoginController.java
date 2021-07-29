@@ -50,7 +50,7 @@ public class LoginController {
                 } else if (("NQL").equals(user.getRoles())){
                     return "redirect:/NQL/capnhatdkpm";
                     } else if (("ADMIN").equals(user.getRoles())){
-                        return "redirect:/ADMIN/capnhatdkpm";
+                        return "redirect:/NQL/capnhatdkpm";
                         }
         }
         model.addAttribute("message", "Username or password is incorrect!");
