@@ -1,6 +1,5 @@
 package com.doan1.doan1_quanlipm.entities;
 
-import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
