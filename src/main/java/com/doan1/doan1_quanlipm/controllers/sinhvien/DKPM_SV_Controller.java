@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class DKPM_SV_Controller {
     private PhanMemService phanMemService;
     @Autowired
     private ThongTinDKGVService thongTinDKGVService;
+    @Autowired
+    private ThoiKhoaBieuService thoiKhoaBieuService;
 
 
     @GetMapping("SV/capnhatdkpm")
@@ -51,19 +56,23 @@ public class DKPM_SV_Controller {
             return "SV/themdkpm";
         }
     }
+
     @PostMapping("SV/themdkpm")
     public String postThemDK(HttpServletRequest request, HttpSession session, Model model){
         String mamay = request.getParameter("maytinh");
         Users user = (Users) session.getAttribute("loginUser");
         Date tgiansd = Date.valueOf(request.getParameter("thoigiansd"));
-        String start = request.getParameter("startTime");
-        String end = request.getParameter("endTime");
+        LocalDate day = LocalDate.parse(request.getParameter("thoigiansd"));
+        DayOfWeek thu = day.getDayOfWeek();
+        int start = Integer.parseInt(request.getParameter("startTime"));
+        int end = Integer.parseInt(request.getParameter("endTime"));
         java.util.Date date = new java.util.Date();
         PhongMay phongMay = phongMayService.findByMaPhong((String) session.getAttribute("phongmayId"));
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
         MayTinh mayTinh = mayTinhService.findByMaMay(mamay);
         thongTinDKSVService.themDK(user, phongMay, mayTinh, date,tgiansd, start, end , 0);
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, start, 1) > 0){
+        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
+            model.addAttribute("message", "Phòng đã có giáo viên đăng ký hoặc trùng TKB");
             return "redirect:/SV/capnhatdkpm";
         }
         else {
@@ -101,16 +110,19 @@ public class DKPM_SV_Controller {
         Long id = Long.valueOf(request.getParameter("id"));
         session.setAttribute("ttdksvid", id);
         String mamay = request.getParameter("maytinh");
+        String maphong = request.getParameter("phongmay");
         Users user = (Users) session.getAttribute("loginUser");
         Date tgiansd = Date.valueOf(request.getParameter("thoigiansd"));
-        String start = request.getParameter("startTime");
-        String end = request.getParameter("endTime");
+        LocalDate day = LocalDate.parse(request.getParameter("thoigiansd"));
+        DayOfWeek thu = day.getDayOfWeek();
+        int start = Integer.parseInt(request.getParameter("startTime"));
+        int end = Integer.parseInt(request.getParameter("endTime"));
         java.util.Date date = new java.util.Date();
-        PhongMay phongMay = phongMayService.findByMaPhong((String) session.getAttribute("phongmayId"));
+        PhongMay phongMay = phongMayService.findByMaPhong(maphong);
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
         MayTinh mayTinh = mayTinhService.findByMaMay(mamay);
         thongTinDKSVService.suaDK(id, user, phongMay, mayTinh,date ,tgiansd, start, end , 0);
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, start, 1) > 0){
+        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
             return "redirect:/SV/capnhatdkpm";
         }
         else {
@@ -118,7 +130,7 @@ public class DKPM_SV_Controller {
         }
     }
     @GetMapping("/SV/suaungdung")
-    public String getSuaUD(Model model, HttpSession session){
+    public String getSuaUD(HttpSession session){
         Users user = (Users) session.getAttribute("loginUser");
         if(("").equals(user) || user == null)
             return "redirect:/login";

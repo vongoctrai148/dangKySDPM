@@ -10,15 +10,15 @@
             <input type="date" id="start" name="ngaysd"
                    class="form-control" id="dateTime" value=""
                    min="2021-01-01" max="2050-12-31" style="width: 17%; display: inline;" required/>
-            <label style="margin-top: 1%; margin-left: 8%">Giờ bắt đầu: </label>
+            <label style="margin-top: 1%; margin-left: 8%">Từ tiết: </label>
             <select name="startTime" required>
-                <c:forEach begin="6" end="18" step="1" var="items">
+                <c:forEach begin="1" end="12" step="1" var="items">
                     <option value="${items}">${items}</option>
                 </c:forEach>
             </select>
-            <label style="margin-top: 1%; margin-left: 3%;">Giờ kết thúc: </label>
+            <label style="margin-top: 1%; margin-left: 3%;">Đến tiết: </label>
             <select name="endTime" required>
-                <c:forEach begin="7" end="20" step="1" var="items">
+                <c:forEach begin="2" end="13" step="1" var="items">
                     <option value="${items}">${items}</option>
                 </c:forEach>
             </select>
@@ -32,7 +32,6 @@
         </select>
     </div>
     <div class="form-group">
-        ${message}
         <label>Chọn phòng:</label>
         <select type="text" class="form-control" name="phongmay" required
                 style="display: inline; width: 20%; margin-left: 2%">
@@ -41,6 +40,7 @@
             </c:forEach>
         </select>
     </div>
+    ${message}
     <div class="form-group">
         <label>Mã lớp học phần:</label>
         <select type="text" class="form-control" name="lophocphan" required
@@ -62,5 +62,4 @@
 <script type="text/javascript">
     $(".chosen-select").chosen();
     var phanmems = $('#phanmemId').val();
-
 </script>

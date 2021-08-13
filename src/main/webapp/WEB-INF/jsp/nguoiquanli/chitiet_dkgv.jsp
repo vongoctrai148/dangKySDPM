@@ -27,7 +27,7 @@
                     <label class="col-md-2">Ngày:</label>
                     <div class="col-md-3" style="color: #000000">${ttdkgv.ngaysd}</div>
                     <label class="col-md-2">Thời gian:</label>
-                    <div class="col-md-3" style="color: #000000">Từ ${ttdkgv.giobatdau} - ${ttdkgv.gioketthuc}h</div>
+                    <div class="col-md-3" style="color: #000000">Từ tiết: ${ttdkgv.tutiet} đến ${ttdkgv.dentiet}</div>
                 </div>
                 <div class="row">
                     <label class="col-md-2">Phòng máy:</label>
@@ -58,13 +58,11 @@
                     </script>
                     </div>
                 </div>
-                <a href="/NQL/kiemtraphong/${ttdkgv.id}" class="btn btn-primary" style="margin-left: 20%; margin-top: 1%">Kiểm tra</a>
-                <i style="color: black; margin-left: 5%">${message} </i>
+                <i style="color: black; margin-left: 5%">${message}</i>
             </div>
             ${notification}
             <div class="button" style="margin-bottom: 5%">
-                <a href="/NQL/denyTTDKGV/${ttdkgv.id}" class="btn btn-primary" style="margin-left: 20%">Từ chối</a>
-                <a href="/NQL/aceptTTDKGV/${ttdkgv.id}" class="btn btn-primary" style="margin-left: 25%">Đồng ý</a>
+                <a href="/NQL/aceptTTDKGV/${ttdkgv.id}" class="btn btn-primary" style="margin-left: 40%">Đồng ý</a>
             </div>
         </div>
         <!-- /.container-fluid -->

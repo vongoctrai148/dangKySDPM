@@ -19,7 +19,7 @@
             <c:forEach items="${ttdkgvs}" var="ttdk">
                 <div class="history-item">
                 <h5> <i class="fas fa-caret-right"></i> Đăng ký phòng máy ${ttdk.phongmay.maphong}</h5>
-                    <p>Đã đăng ký phòng ${ttdk.phongmay.maphong}, ngày ${ttdk.ngaysd}, từ ${ttdk.giobatdau}h - ${ttdk.gioketthuc}h</p>
+                    <p>Đã đăng ký phòng ${ttdk.phongmay.maphong}, ngày ${ttdk.ngaysd}, từ tiết ${ttdk.tutiet} đến tiết ${ttdk.dentiet}</p>
                 <div class="history-link">
                     <a href="/GV/chitietlichsu/${ttdk.id}" class="detail">Xem chi tiết <i class="fas fa-angle-double-right"></i></a>
                 </div>

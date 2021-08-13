@@ -27,7 +27,7 @@
                 <div class="row">
                     <label class="col-md-2">Thời gian sử dụng:</label>
                     <div class="col-md-3" style="color: #000;">${ttbcsv.thongTinDKSV.ngaysd}</div>
-                    <label class="col-md-3" style="color: #000;">Thời gian: Từ ${ttbcsv.thongTinDKSV.giobatdau} - ${ttbcsv.thongTinDKSV.gioketthuc}h</label>
+                    <label class="col-md-3" style="color: #000;">Thời gian: Từ tiết ${ttbcsv.thongTinDKSV.tutiet} đến ${ttbcsv.thongTinDKSV.dentiet}</label>
                 </div>
                 <div class="row">
                     <label class="col-md-2">Phòng máy:</label>

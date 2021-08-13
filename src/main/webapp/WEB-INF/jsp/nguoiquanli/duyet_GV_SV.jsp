@@ -102,6 +102,7 @@
                                         <th>Mã sinh viên</th>
                                         <th>Tên sinh viên</th>
                                         <th>Thời gian đăng ký</th>
+                                        <th>Máy đăng ký</th>
                                         <th colspan="2">Thao tác</th>
                                     </tr>
                                     </thead>
@@ -112,6 +113,7 @@
                                         <td>${ttdksv.user.username}</td>
                                         <td>${ttdksv.user.hoten}</td>
                                         <td>${ttdksv.thoigiandk}</td>
+                                        <td>${ttdksv.mamay.mamay}</td>
                                         <td align="center"><a href="/NQL/aceptDKSV/${ttdksv.id}" class="btn btn-primary">Đồng ý</a></td>
                                         <td align="center"><a href="/NQL/denyDKSV/${ttdksv.id}"  class="btn btn-primary">Từ chối</a></td>
                                     </tr>

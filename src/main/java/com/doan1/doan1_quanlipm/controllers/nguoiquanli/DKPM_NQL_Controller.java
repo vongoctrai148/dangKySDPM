@@ -51,8 +51,8 @@ public class DKPM_NQL_Controller {
             return "redirect:/login";
         }
         else {
-            model.addAttribute("ttdkgvs", thongTinDKGVService.findByNQLUsername(user.getUsername(),0));
-            model.addAttribute("ttdksvs", thongTinDKSVService.getSVMuonMayNQL(user.getUsername(), 0));
+            model.addAttribute("ttdkgvs", thongTinDKGVService.findByNQLMaPhong(user.getPhongMay().getMaphong(),0));
+            model.addAttribute("ttdksvs", thongTinDKSVService.getSVMuonMayNQL(user.getPhongMay().getMaphong(), 0));
             return "NQL/duyetgvdk";
         }
     }
@@ -63,29 +63,18 @@ public class DKPM_NQL_Controller {
             return "redirect:/login";
         }
         else {
-            model.addAttribute("ttdkgv", thongTinDKGVService.findById(id));
+            ThongTinDKGV thongTinDKGV = thongTinDKGVService.findById(id);
+            model.addAttribute("ttdkgv", thongTinDKGV);
+            if (thongTinDKGVService.checkTTDKGV(user.getPhongMay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getDentiet(), thongTinDKGV.getTutiet(), 1) > 0) {
+                model.addAttribute("message", "Phòng đã có người đăng ký!");
+            }
+            else{
+                model.addAttribute("message", "Phòng có thể đăng ký mượn!");
+            }
             return "NQL/chitietdkgv";
         }
     }
 
-    @GetMapping("/NQL/kiemtraphong/{id}")
-    public String getCheckTTDK(@PathVariable("id") Long id, HttpSession session, Model model){
-        Users user = (Users) session.getAttribute("loginUser");
-        if(("").equals(user) || user == null){
-            return "redirect:/login";
-        }
-        else {
-            ThongTinDKGV thongTinDKGV = thongTinDKGVService.findById(id);
-            if (thongTinDKGVService.checkTTDKGV(user.getPhongMay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getGiobatdau(), 1) > 0) {
-                model.addAttribute("message", "Phòng đã có người đăng ký!");
-                return "/NQL/chitietdkgv/" + id;
-            }
-            else{
-                model.addAttribute("message", "Phòng có thể đăng ký mượn!");
-                return "/NQL/chitietdkgv/" + id;
-            }
-        }
-    }
     @GetMapping("NQL/aceptTTDKGV/{id}")
     public String getAceptTTKDGV(@PathVariable("id") Long id, HttpSession session, Model model){
         Users user = (Users) session.getAttribute("loginUser");
@@ -94,25 +83,8 @@ public class DKPM_NQL_Controller {
         }
         else {
             ThongTinDKGV thongTinDKGV = thongTinDKGVService.findById(id);
-            if (thongTinDKGVService.checkTTDKGV(user.getPhongMay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getGiobatdau(), 1) > 0) {
-                model.addAttribute("notification", "Phòng đã có người đăng ký!");
-                return "/NQL/chitietdkgv/" + id;
-            }
-            else {
-                thongTinDKGVService.aceptTTKDGV(id);
-                model.addAttribute("notification", "Thành công");
-                return "/NQL/chitietdkgv/" + id;
-            }
-        }
-    }
-    @GetMapping("NQL/denyTTDKGV/{id}")
-    public String getDenyTTKDGV(@PathVariable("id") Long id, HttpSession session, Model model){
-        Users user = (Users) session.getAttribute("loginUser");
-        if(("").equals(user) || user == null){
-            return "redirect:/login";
-        }
-        else {
-            thongTinDKGVService.denyTTKDGV(id);
+            thongTinDKGVService.aceptTTKDGV(id);
+            thongTinDKGVService.denyTTKDGVByTimeRange(user.getPhongMay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getDentiet(), thongTinDKGV.getTutiet(), 0);
             model.addAttribute("notification", "Thành công");
             return "/NQL/chitietdkgv/" + id;
         }
@@ -120,7 +92,7 @@ public class DKPM_NQL_Controller {
 
     //Sinh viên Aceptable
     @GetMapping("NQL/aceptDKSV/{id}")
-    public String getAceptDKSV(@PathVariable("id") Long id, HttpSession session){
+    public String getAceptDKSV(@PathVariable("id") Long id){
         thongTinDKSVService.aceptDKSV(id);
         return "redirect:/NQL/duyetgvdk";
     }

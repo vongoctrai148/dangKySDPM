@@ -30,8 +30,8 @@ public class ThongTinDKSV {
     private MayTinh mamay;
     private Date thoigiandk;
     private Date ngaysd;
-    private String giobatdau;
-    private String gioketthuc;
+    private int tutiet;
+    private int dentiet;
     private int ketqua;
     @JsonIgnore
     @OneToOne(mappedBy = "thongTinDKSV", fetch = FetchType.EAGER)
@@ -41,14 +41,14 @@ public class ThongTinDKSV {
     @OneToMany(mappedBy = "thongtindksv", fetch = FetchType.LAZY)
     private List<ThongTinDangKyPhanMem> thongTinDangKyPhanMems;
 
-    public ThongTinDKSV(Users user, PhongMay maphong, MayTinh mamay, Date thoigiandk, Date ngaysd, String giobatdau, String gioketthuc, int ketqua) {
+    public ThongTinDKSV(Users user, PhongMay maphong, MayTinh mamay, Date thoigiandk, Date ngaysd, int tutiet, int dentiet, int ketqua) {
         this.user = user;
         this.maphong = maphong;
         this.mamay = mamay;
         this.thoigiandk = thoigiandk;
         this.ngaysd = ngaysd;
-        this.giobatdau = giobatdau;
-        this.gioketthuc = gioketthuc;
+        this.tutiet = tutiet;
+        this.dentiet = dentiet;
         this.ketqua = ketqua;
     }
 }

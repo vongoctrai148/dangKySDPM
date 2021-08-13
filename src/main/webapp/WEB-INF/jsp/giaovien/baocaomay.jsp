@@ -23,7 +23,7 @@
                         <label>Ngày: ${ttdkgv.ngaysd}</label>
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Từ ${ttdkgv.giobatdau} - ${ttdkgv.gioketthuc}h</label>
+                        <label>Từ tiết: ${ttdkgv.tutiet} đến ${ttdkgv.dentiet}</label>
                     </div>
                     <div class="form-group col-md-3">
                         <label>Phòng: ${ttdkgv.phongmay.maphong}</label>

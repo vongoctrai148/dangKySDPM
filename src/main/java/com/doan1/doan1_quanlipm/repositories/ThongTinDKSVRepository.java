@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ThongTinDKSVRepository extends JpaRepository<ThongTinDKSV, Long> {
     @Query("select tt from ThongTinDKSV tt, Users u where " +
-            "u.username = tt.user.username  and tt.user.username = ?1 order by tt.thoigiandk desc ")
+            "u.username = tt.user.username  and tt.user.username = ?1 order by tt.thoigiandk desc")
     List<ThongTinDKSV> findAllByUsername(String username);
     @Query("select max(tt.id) from ThongTinDKSV tt")
     Long findMaxId();
@@ -17,11 +17,11 @@ public interface ThongTinDKSVRepository extends JpaRepository<ThongTinDKSV, Long
     @Query("select tt from ThongTinDKSV tt where tt.id = ?1")
     ThongTinDKSV findThongTinDKSVByMaxId(Long id);
 
-    @Query("select count(tt) from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.ngaysd = ?2 and tt.giobatdau = ?3 and tt.ketqua = ?4 ")
-    int countSVMuonPhong(String maphong, Date ngaysd, String giobatdau, int ketqua);
+    @Query("select count(tt) from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.ngaysd = ?2 and tt.tutiet < ?3 and tt.dentiet > ?4 and tt.ketqua = ?5 ")
+    int countSVMuonPhong(String maphong, Date ngaysd, int end, int start, int ketqua);
 
-    @Query("select tt from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.ngaysd = ?2 and tt.giobatdau = ?3 and tt.ketqua = ?4 ")
-    List<ThongTinDKSV> findSVMuonPhong(String maphong, Date ngaysd, String giobatdau, int ketqua);
-    @Query("select tt from ThongTinDKSV tt, PhongMay pm where pm.user.username = ?1 and tt.ketqua = ?2 order by tt.thoigiandk asc ")
-    List<ThongTinDKSV> getSVMuonMayNQL(String username, int ketqua);
+    @Query("select tt from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.ngaysd = ?2 and tt.tutiet = ?3 and tt.ketqua = ?4 ")
+    List<ThongTinDKSV> findSVMuonPhong(String maphong, Date ngaysd, int giobatdau, int ketqua);
+    @Query("select tt from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.ketqua = ?2 order by tt.thoigiandk asc ")
+    List<ThongTinDKSV> getSVMuonMayNQL(String maphong, int ketqua);
 }

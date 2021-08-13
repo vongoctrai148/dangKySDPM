@@ -24,7 +24,7 @@
                         <label>Ngày: ${ttdksv.ngaysd}</label>
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Từ ${ttdksv.giobatdau} - ${ttdksv.gioketthuc}h</label>
+                        <label>Từ ${ttdksv.tutiet} - ${ttdksv.dentiet}h</label>
                     </div>
                     <div class="form-group col-md-3">
                         <label>Phòng: ${ttdksv.maphong.maphong}</label>

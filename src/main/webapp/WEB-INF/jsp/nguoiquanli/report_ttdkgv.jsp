@@ -29,7 +29,8 @@
                     <th>Thời gian đăng ký</th>
                     <th>Mã lớp học phần</th>
                     <th>Ngày sử dụng</th>
-                    <th>Giờ sử dụng</th>
+                    <th>Từ tiết</th>
+                    <th>Đến tiết</th>
                     <th>Tình trạng</th>
                 </tr>
                 </thead>
@@ -43,7 +44,8 @@
                         <td>${ttdkgv.thoigiandk}</td>
                         <td>${ttdkgv.lophp.malhp}</td>
                         <td>${ttdkgv.ngaysd}</td>
-                        <td>${ttdkgv.giobatdau} - ${ttdkgv.gioketthuc} h</td>
+                        <td>${ttdkgv.tutiet}</td>
+                        <td>${ttdkgv.dentiet}</td>
                         <td>
                             <script>
                                 if(${ttdkgv.ketqua} == 1 )

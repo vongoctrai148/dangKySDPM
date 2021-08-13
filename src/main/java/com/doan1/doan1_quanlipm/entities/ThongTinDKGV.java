@@ -40,20 +40,20 @@ public class ThongTinDKGV {
 
     private Date thoigiandk;
     private Date ngaysd;
-    private String giobatdau;
-    private String gioketthuc;
+    private int tutiet;
+    private int dentiet;
     private String mucdich;
     private int soluongsv;
     private int ketqua;
 
-    public ThongTinDKGV(Users user, PhongMay phongmay, LopHocPhan lophp, Date thoigiandk, Date ngaysd, String giobatdau, String gioketthuc, String mucdich, int soluongsv, int ketqua) {
+    public ThongTinDKGV(Users user, PhongMay phongmay, LopHocPhan lophp, Date thoigiandk, Date ngaysd, int tutiet, int dentiet, String mucdich, int soluongsv, int ketqua) {
         this.user = user;
         this.phongmay = phongmay;
         this.lophp = lophp;
         this.thoigiandk = thoigiandk;
         this.ngaysd = ngaysd;
-        this.giobatdau = giobatdau;
-        this.gioketthuc = gioketthuc;
+        this.tutiet = tutiet;
+        this.dentiet = dentiet;
         this.mucdich = mucdich;
         this.soluongsv = soluongsv;
         this.ketqua = ketqua;

@@ -10,8 +10,8 @@
     <field name="thoigiandk" class="java.util.Date"/>
     <field name="malhp" class="java.lang.String"/>
     <field name="ngaysd" class="java.util.Date"/>
-    <field name="start" class="java.lang.String"/>
-    <field name="end" class="java.lang.String"/>
+    <field name="start" class="java.lang.Integer"/>
+    <field name="end" class="java.lang.Integer"/>
     <background>
         <band splitType="Stretch"/>
     </background>

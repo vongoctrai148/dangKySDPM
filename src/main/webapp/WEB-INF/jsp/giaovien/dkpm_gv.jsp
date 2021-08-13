@@ -25,7 +25,8 @@
                         <th>Phòng đăng ký</th>
                         <th>Ngày đăng ký</th>
                         <th>Ngày sử dụng</th>
-                        <th>Giờ mượn phòng</th>
+                        <th>Từ tiết</th>
+                        <th>Đến tiết</th>
                         <th>Tình trạng</th>
                         <th colspan="3">Thao tác</th>
                     </tr>
@@ -36,7 +37,8 @@
                         <th>Phòng đăng ký</th>
                         <th>Ngày đăng ký</th>
                         <th>Ngày sử dụng</th>
-                        <th>Giờ mượn phòng</th>
+                        <th>Từ tiết</th>
+                        <th>Đến tiết</th>
                         <th>Tình trạng</th>
                         <th colspan="3">Thao tác</th>
                     </tr>
@@ -48,7 +50,8 @@
                         <td>${ttdkgv.phongmay.maphong}</td>
                         <td>${ttdkgv.thoigiandk}</td>
                         <td>${ttdkgv.ngaysd}</td>
-                        <td>${ttdkgv.giobatdau} - ${ttdkgv.gioketthuc} h</td>
+                        <td>${ttdkgv.tutiet}</td>
+                        <td>${ttdkgv.dentiet}</td>
                         <td>
                             <script>
                                 if(${ttdkgv.ketqua} == 1 )

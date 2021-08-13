@@ -25,7 +25,7 @@
                     <label class="col-md-2">Ngày:</label>
                     <div class="col-md-3" style="color: #000000">${ttdksv.ngaysd}</div>
                     <label class="col-md-2">Thời gian:</label>
-                    <div class="col-md-3" style="color: #000000">Từ ${ttdksv.giobatdau} - ${ttdksv.gioketthuc}h</div>
+                    <div class="col-md-3" style="color: #000000">Từ tiết ${ttdksv.tutiet} đến tiết ${ttdksv.dentiet}</div>
                 </div>
                 <div class="row">
                     <label class="col-md-2">Phòng máy:</label>

@@ -26,7 +26,8 @@
                         <th>Máy đăng ký</th>
                         <th>Ngày đăng ký</th>
                         <th>Ngày sử dụng</th>
-                        <th>Giờ mượn phòng</th>
+                        <th>Từ tiết</th>
+                        <th>Đến tiết</th>
                         <th>Tình trạng</th>
                         <th colspan="3">Thao tác</th>
                     </tr>
@@ -38,7 +39,8 @@
                         <th>Máy đăng ký</th>
                         <th>Ngày đăng ký</th>
                         <th>Ngày sử dụng</th>
-                        <th>Giờ mượn phòng</th>
+                        <th>Từ tiết</th>
+                        <th>Đến tiết</th>
                         <th>Tình trạng</th>
                         <th colspan="3">Thao tác</th>
                     </tr>
@@ -51,7 +53,8 @@
                         <td>${thongtindksv.mamay.mamay}</td>
                         <td>${thongtindksv.thoigiandk}</td>
                         <td>${thongtindksv.ngaysd}</td>
-                        <td>${thongtindksv.giobatdau} - ${thongtindksv.gioketthuc} h</td>
+                        <td>${thongtindksv.tutiet}</td>
+                        <td>${thongtindksv.dentiet} </td>
                         <td>
                             <script>
                                 if(${thongtindksv.ketqua} == 1 )

@@ -35,7 +35,7 @@ public class Duyet_SVDK_Controller {
             List<ThongTinDKGV> thongTinDKGVList = thongTinDKGVService.findByUsername(user.getUsername());
             for (int i = 0; i< thongTinDKGVList.size(); i++) {
                 model.addAttribute("sosvmuon", thongTinDKSVService.countSVMuon(thongTinDKGVList.get(i).getPhongmay().getMaphong(),
-                        thongTinDKGVList.get(i).getNgaysd(), thongTinDKGVList.get(i).getGiobatdau(), 0));
+                        thongTinDKGVList.get(i).getNgaysd(), thongTinDKGVList.get(i).getDentiet(), thongTinDKGVList.get(i).getTutiet(), 0)+1);
             }
             return "GV/dsachphongmuon";
         }
@@ -50,7 +50,7 @@ public class Duyet_SVDK_Controller {
         else {
             ThongTinDKGV thongTinDKGV = thongTinDKGVService.findById(id);
             model.addAttribute("ttdkgv", thongTinDKGVService.findById(id));
-            model.addAttribute("ttdksvs", thongTinDKSVService.findSVMuonPhong(thongTinDKGV.getPhongmay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getGiobatdau(), 0));
+            model.addAttribute("ttdksvs", thongTinDKSVService.findSVMuonPhong(thongTinDKGV.getPhongmay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getTutiet(), 0));
             return "GV/duyetsvdk";
         }
     }
@@ -64,7 +64,7 @@ public class Duyet_SVDK_Controller {
     public String getAceptAll(HttpSession session){
         Long ttdkgvid = (Long) session.getAttribute("ttdkgvid");
         ThongTinDKGV thongTinDKGV = thongTinDKGVService.findById(ttdkgvid);
-        thongTinDKSVService.aceptAll(thongTinDKGV.getPhongmay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getGiobatdau(), 0);
+        thongTinDKSVService.aceptAll(thongTinDKGV.getPhongmay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getTutiet(), 0);
         return "redirect:/GV/duyetsvdk/"+ttdkgvid;
     }
     @GetMapping("GV/denyDKSV/{id}")
@@ -77,7 +77,7 @@ public class Duyet_SVDK_Controller {
     public String getDenyAll(HttpSession session){
         Long ttdkgvid = (Long) session.getAttribute("ttdkgvid");
         ThongTinDKGV thongTinDKGV = thongTinDKGVService.findById(ttdkgvid);
-        thongTinDKSVService.denytAll(thongTinDKGV.getPhongmay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getGiobatdau(), 0);
+        thongTinDKSVService.denytAll(thongTinDKGV.getPhongmay().getMaphong(), thongTinDKGV.getNgaysd(), thongTinDKGV.getTutiet(), 0);
         return "redirect:/GV/duyetsvdk/"+ttdkgvid;
 
     }

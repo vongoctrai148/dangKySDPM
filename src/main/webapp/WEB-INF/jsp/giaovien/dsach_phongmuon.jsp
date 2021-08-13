@@ -20,7 +20,7 @@
                 <div class="history-item">
                     <h5> <i class="fas fa-caret-right"></i>Phòng ${ttdk.phongmay.maphong}: <i style="color: #3eb422">Có ${sosvmuon} sinh viên đăng ký</i></h5>
 
-                    <p>Bạn đã đăng ký phòng ${ttdk.phongmay.maphong}, ngày ${ttdk.ngaysd}, từ ${ttdk.giobatdau}h - ${ttdk.gioketthuc}h</p>
+                    <p>Bạn đã đăng ký phòng ${ttdk.phongmay.maphong}, ngày ${ttdk.ngaysd}, từ tiết ${ttdk.tutiet} đến ${ttdk.dentiet}</p>
                 <div class="history-link">
                     <a href="/GV/duyetsvdk/${ttdk.id}" class="detail">Xem chi tiết <i class="fas fa-angle-double-right"></i></a>
                 </div>

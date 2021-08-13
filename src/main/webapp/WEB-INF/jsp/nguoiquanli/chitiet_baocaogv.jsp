@@ -37,6 +37,10 @@
                     <div class="col-md-3" style="color: #000;">${ttdkgv.ngaysd}</div>
                 </div>
                 <div class="row">
+                    <label class="col-md-2">Từ tiết:</label>
+                    <div class="col-md-3" style="color: #000;">${ttdkgv.tutiet} đến ${ttdkgv.dentiet}</div>
+                </div>
+                <div class="row">
                     <div class="form-group col-md-10">
                         <div class="card-body">
                             <div class="table-responsive">

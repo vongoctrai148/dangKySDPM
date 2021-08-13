@@ -15,8 +15,8 @@ public interface ThongTinDKGVRepository extends JpaRepository<ThongTinDKGV, Long
     @Query("select tt from ThongTinDKGV tt where tt.user.username = ?1 order by tt.thoigiandk desc ")
     List<ThongTinDKGV> findByUsername(String username);
 
-    @Query("select tt from ThongTinDKGV tt, PhongMay pm where pm.user.username = ?1 and tt.ketqua = ?2 order by tt.thoigiandk asc ")
-    List<ThongTinDKGV> findByNQLUsername(String username, int ketqua);
+    @Query("select tt from ThongTinDKGV tt where tt.phongmay.maphong = ?1 and tt.ketqua = ?2 order by tt.thoigiandk asc ")
+    List<ThongTinDKGV> findByMaPhongNQL(String maphong, int ketqua);
 
     @Query("select tt from ThongTinDKGV tt, PhongMay pm where pm.user.username = ?1 order by tt.thoigiandk asc ")
     List<ThongTinDKGV> findByNQLUsernameToRP(String username);
@@ -24,6 +24,10 @@ public interface ThongTinDKGVRepository extends JpaRepository<ThongTinDKGV, Long
     @Query("select tt from ThongTinDKGV tt where tt.user.username = ?1 and tt.ketqua = ?2")
     List<ThongTinDKGV> findByUsernameAndKQ(String usernamem, int ketqua);
 
-    @Query("select count(tt) from ThongTinDKGV tt where tt.phongmay.maphong = ?1 and tt.ngaysd = ?2 and tt.giobatdau = ?3 and tt.ketqua = ?4")
-    int checkTTDKGV(String maphong, Date ngaysd, String giobatdau, int ketqua);
+    @Query("select tt from ThongTinDKGV tt where tt.phongmay.maphong = ?1 and tt.ngaysd = ?2 and tt.tutiet < ?3 and tt.dentiet > ?4 and tt.ketqua = ?5")
+    List<ThongTinDKGV> findByTimeRange(String maphong, Date ngaysd, int end, int start, int ketqua);
+
+    @Query("select count(tt) from ThongTinDKGV tt where tt.phongmay.maphong = ?1 and tt.ngaysd = ?2 and tt.tutiet < ?3 and tt.dentiet > ?4 and tt.ketqua = ?5")
+    int checkTTDKGV(String maphong, Date ngaysd, int giobatdau, int dentiet, int ketqua);
+
 }

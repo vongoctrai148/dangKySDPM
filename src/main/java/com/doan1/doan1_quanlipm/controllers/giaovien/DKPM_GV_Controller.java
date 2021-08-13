@@ -1,9 +1,6 @@
 package com.doan1.doan1_quanlipm.controllers.giaovien;
 
-import com.doan1.doan1_quanlipm.entities.LopHocPhan;
-import com.doan1.doan1_quanlipm.entities.PhanMem;
-import com.doan1.doan1_quanlipm.entities.PhongMay;
-import com.doan1.doan1_quanlipm.entities.Users;
+import com.doan1.doan1_quanlipm.entities.*;
 import com.doan1.doan1_quanlipm.repositories.LopHocPhanRepository;
 import com.doan1.doan1_quanlipm.services.*;
 import org.apache.logging.log4j.util.StringBuilders;
@@ -18,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.sql.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -33,6 +32,8 @@ public class DKPM_GV_Controller {
     private PhanMemService phanMemService;
     @Autowired
     private ThongTinDKPMService thongTinDKPMService;
+    @Autowired
+    private ThoiKhoaBieuService thoiKhoaBieuService;
 
     @GetMapping("/GV/capnhatdkpm")
     public String getCapNhatDK(HttpSession session, Model model) {
@@ -63,9 +64,11 @@ public class DKPM_GV_Controller {
         PhongMay phongMay = phongMayService.findByMaPhong(request.getParameter("phongmay"));
         LopHocPhan lopHocPhan = lopHocPhanService.findByMaLHP(request.getParameter("lophocphan"));
         Date ngaysd = Date.valueOf(request.getParameter("ngaysd"));
+        LocalDate day = LocalDate.parse(request.getParameter("ngaysd"));
+		DayOfWeek thu = day.getDayOfWeek();
         java.util.Date date = new java.util.Date();
-        String start = request.getParameter("startTime");
-        String end = request.getParameter("endTime");
+        int start = Integer.parseInt(request.getParameter("startTime"));
+        int end = Integer.parseInt(request.getParameter("endTime"));
         int soluongsv = Integer.parseInt(request.getParameter("soluongsv"));
         String[] mucdichs = request.getParameterValues("mucdich");
         StringBuilder mucdich = new StringBuilder("");
@@ -73,9 +76,9 @@ public class DKPM_GV_Controller {
             mucdich.append(mucdichs[i]);
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, start, 1) > 0){
-            model.addAttribute("message", "Phòng đã có giáo viên mượn");
-            return "redirect:/GV/themdkpm";
+        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
+            model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc có trong TKB");
+            return "GV/themdkpm";
         }
         else {
             thongTinDKGVService.addTTDKGV(user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
@@ -118,9 +121,11 @@ public class DKPM_GV_Controller {
         PhongMay phongMay = phongMayService.findByMaPhong(request.getParameter("phongmay"));
         LopHocPhan lopHocPhan = lopHocPhanService.findByMaLHP(request.getParameter("lophocphan"));
         Date ngaysd = Date.valueOf(request.getParameter("ngaysd"));
+        LocalDate day = LocalDate.parse(request.getParameter("ngaysd"));
+        DayOfWeek thu = day.getDayOfWeek();
         java.util.Date date = new java.util.Date();
-        String start = request.getParameter("startTime");
-        String end = request.getParameter("endTime");
+        int start = Integer.parseInt(request.getParameter("startTime"));
+        int end = Integer.parseInt(request.getParameter("endTime"));
         int soluongsv = Integer.parseInt(request.getParameter("soluongsv"));
         String[] mucdichs = request.getParameterValues("mucdich");
         StringBuilder mucdich = new StringBuilder("");
@@ -128,8 +133,8 @@ public class DKPM_GV_Controller {
             mucdich.append(mucdichs[i]);
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, start, 1) > 0){
-            model.addAttribute("message", "Phòng đã có giáo viên mượn");
+        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
+            model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc trùng TKB");
             return "redirect:/GV/suadkpm/"+id;
         }
         else {

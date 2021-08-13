@@ -1,9 +1,6 @@
 package com.doan1.doan1_quanlipm.services;
 
-import com.doan1.doan1_quanlipm.entities.LopHocPhan;
-import com.doan1.doan1_quanlipm.entities.PhongMay;
-import com.doan1.doan1_quanlipm.entities.ThongTinDKGV;
-import com.doan1.doan1_quanlipm.entities.Users;
+import com.doan1.doan1_quanlipm.entities.*;
 import com.doan1.doan1_quanlipm.repositories.ThongTinDKGVRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +20,7 @@ public class ThongTinDKGVService {
     }
 
     @Transactional
-    public void addTTDKGV(Users user, PhongMay phongMay, LopHocPhan lopHocPhan, Date thoigiandk, Date ngaysd, String start, String end, String mucdich, int soluongsv, int ketqua){
+    public void addTTDKGV(Users user, PhongMay phongMay, LopHocPhan lopHocPhan, Date thoigiandk, Date ngaysd, int start, int end, String mucdich, int soluongsv, int ketqua){
         thongTinDKGVRepository.save(new ThongTinDKGV(user, phongMay, lopHocPhan, thoigiandk, ngaysd, start, end, mucdich, soluongsv, ketqua));
     }
     @Transactional
@@ -39,8 +36,8 @@ public class ThongTinDKGVService {
         return thongTinDKGVRepository.findByUsername(username);
     }
     @Transactional
-    public List<ThongTinDKGV> findByNQLUsername(String username, int ketqua){
-        return thongTinDKGVRepository.findByNQLUsername(username, ketqua);
+    public List<ThongTinDKGV> findByNQLMaPhong(String maphong, int ketqua){
+        return thongTinDKGVRepository.findByMaPhongNQL(maphong, ketqua);
     }
     @Transactional
     public List<ThongTinDKGV> findByUsernameAndKQ(String username, int ketqua){
@@ -51,15 +48,15 @@ public class ThongTinDKGVService {
         return thongTinDKGVRepository.findByNQLUsernameToRP(username);
     }
     @Transactional
-    public void editTTDKGV(Long id, Users user, PhongMay phongMay, LopHocPhan lopHocPhan, Date thoigiandk, Date ngaysd, String start, String end, String mucdich, int soluongsv, int ketqua){
+    public void editTTDKGV(Long id, Users user, PhongMay phongMay, LopHocPhan lopHocPhan, Date thoigiandk, Date ngaysd, int start, int end, String mucdich, int soluongsv, int ketqua){
         ThongTinDKGV thongTinDKGV = thongTinDKGVRepository.findById(id).get();
         thongTinDKGV.setUser(user);
         thongTinDKGV.setPhongmay(phongMay);
         thongTinDKGV.setLophp(lopHocPhan);
         thongTinDKGV.setThoigiandk(thoigiandk);
         thongTinDKGV.setNgaysd(ngaysd);
-        thongTinDKGV.setGiobatdau(start);
-        thongTinDKGV.setGioketthuc(end);
+        thongTinDKGV.setTutiet(start);
+        thongTinDKGV.setDentiet(end);
         thongTinDKGV.setMucdich(mucdich);
         thongTinDKGV.setSoluongsv(soluongsv);
         thongTinDKGV.setKetqua(ketqua);
@@ -71,9 +68,11 @@ public class ThongTinDKGVService {
     }
 
     @Transactional
-    public int checkTTDKGV(String maphong, Date ngaysd, String start, int ketqua){
-        return thongTinDKGVRepository.checkTTDKGV(maphong, ngaysd, start, ketqua);
+    public int checkTTDKGV(String maphong, Date ngaysd, int start, int end, int ketqua){
+        return thongTinDKGVRepository.checkTTDKGV(maphong, ngaysd, start, end, ketqua);
     }
+
+
     @Transactional
     public void aceptTTKDGV(Long id){
         ThongTinDKGV thongTinDKGV = thongTinDKGVRepository.findById(id).get();
@@ -81,9 +80,11 @@ public class ThongTinDKGVService {
         thongTinDKGVRepository.save(thongTinDKGV);
     }
     @Transactional
-    public void denyTTKDGV(Long id){
-        ThongTinDKGV thongTinDKGV = thongTinDKGVRepository.findById(id).get();
-        thongTinDKGV.setKetqua(2);
-        thongTinDKGVRepository.save(thongTinDKGV);
+    public void denyTTKDGVByTimeRange(String maphong, Date ngaysd, int end, int start, int ketqua){
+        List<ThongTinDKGV> thongTinDKGVs = thongTinDKGVRepository.findByTimeRange(maphong, ngaysd, end, start, ketqua);
+        for(int i = 0; i < thongTinDKGVs.size(); i++){
+            thongTinDKGVs.get(i).setKetqua(2);
+            thongTinDKGVRepository.save(thongTinDKGVs.get(i));
+        }
     }
 }

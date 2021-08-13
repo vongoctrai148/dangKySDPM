@@ -11,15 +11,15 @@
             <input type="date" id="ngaysd" name="thoigiansd"
                    class="form-control" id="dateTime" value=""
                    min="2021-01-01" max="2050-12-31" style="width: 17%; display: inline;"/>
-            <label style="margin-top: 1%; margin-left: 8%">Giờ bắt đầu: </label>
+            <label style="margin-top: 1%; margin-left: 8%">Từ tiết: </label>
             <select name="startTime" id="start">
-                <c:forEach begin="6" end="18" step="1" var="item">
+                <c:forEach begin="1" end="12" step="1" var="item">
                     <option value="${item}">${item}</option>
                 </c:forEach>
             </select>
-            <label style="margin-top: 1%; margin-left: 3%;">Giờ kết thúc: </label>
+            <label style="margin-top: 1%; margin-left: 3%;">Đến tiết: </label>
             <select name="endTime" id="end">
-                <c:forEach begin="7" end="20" step="1" var="item">
+                <c:forEach begin="2" end="13" step="1" var="item">
                     <option value="${item}">${item}</option>
                 </c:forEach>
             </select>

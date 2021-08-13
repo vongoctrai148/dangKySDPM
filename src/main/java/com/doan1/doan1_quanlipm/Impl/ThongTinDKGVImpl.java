@@ -27,8 +27,8 @@ public class ThongTinDKGVImpl implements ThongTinDKGVReport {
             item.put("thoigiandk", thongTinDKGV.getThoigiandk());
             item.put("malhp", thongTinDKGV.getLophp().getMalhp());
             item.put("ngaysd", thongTinDKGV.getNgaysd());
-            item.put("start", thongTinDKGV.getGiobatdau());
-            item.put("end", thongTinDKGV.getGioketthuc());
+            item.put("start", thongTinDKGV.getTutiet());
+            item.put("end", thongTinDKGV.getDentiet());
             result.add(item);
         }
         return result;

@@ -12,22 +12,24 @@
             <input type="date" id="ngaysd" name="thoigiansd"
                    class="form-control" id="dateTime" value="${ttdk.ngaysd}"
                    min="2021-01-01" max="2050-12-31" style="width: 17%; display: inline;" required/>
-            <label style="margin-top: 1%; margin-left: 8%">Giờ bắt đầu: </label>
+            <label style="margin-top: 1%; margin-left: 8%">Từ tiết: </label>
             <select name="startTime" id="start" required>
-                <c:forEach begin="6" end="18" step="1" var="item">
+                <option selected value="${ttdk.tutiet}">${ttdk.tutiet}</option>
+                <c:forEach begin="1" end="12" step="1" var="item">
                     <option value="${item}">${item}</option>
                 </c:forEach>
             </select>
-            <label style="margin-top: 1%; margin-left: 3%;">Giờ kết thúc: </label>
+            <label style="margin-top: 1%; margin-left: 3%;">Đến tiết: </label>
             <select name="endTime" id="end" required>
-                <c:forEach begin="7" end="20" step="1" var="item">
+                <option selected value="${ttdk.dentiet}">${ttdk.dentiet}</option>
+                <c:forEach begin="2" end="13" step="1" var="item">
                     <option value="${item}">${item}</option>
                 </c:forEach>
             </select>
     </div>
     <div class="form-group">
         <label>Chọn phòng:</label>
-        <select type="text" class="form-control" id="phongmayId" required
+        <select type="text" class="form-control" id="phongmayId" required name="phongmay"
                  style="display: inline; width: 20%; margin-left: 2%">
             <option selected value="${ttdk.maphong.maphong}">${ttdk.maphong.maphong}</option>
             <c:forEach items="${phongmay}" var="phongmay">
