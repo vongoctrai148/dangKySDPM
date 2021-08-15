@@ -76,13 +76,18 @@ public class DKPM_GV_Controller {
             mucdich.append(mucdichs[i]);
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
-            model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc có trong TKB, bấm back để đăng ký lại!");
+        if(ngaysd.before(date)){
+            model.addAttribute("message", "Ngày sử dụng phải lớn hơn ngày ngày hiện tại");
             return "GV/themdkpm";
         }
         else {
-            thongTinDKGVService.addTTDKGV(user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
-            return "GV/themungdung";
+            if (thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue() + 1, end, start) > 0) {
+                model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc có trong TKB, bấm back để đăng ký lại!");
+                return "GV/themdkpm";
+            } else {
+                thongTinDKGVService.addTTDKGV(user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
+                return "GV/themungdung";
+            }
         }
     }
     @PostMapping("GV/themungdung")
@@ -133,13 +138,18 @@ public class DKPM_GV_Controller {
             mucdich.append(mucdichs[i]);
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
-            model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc trùng TKB");
-            return "GV/suadkpm";
+        if(ngaysd.before(date)){
+            model.addAttribute("message", "Ngày sử dụng phải lớn hơn ngày ngày hiện tại");
+            return "GV/themdkpm";
         }
         else {
-            thongTinDKGVService.editTTDKGV(id, user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
-            return "GV/suaungdung";
+            if (thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue() + 1, end, start) > 0) {
+                model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc trùng TKB");
+                return "GV/suadkpm";
+            } else {
+                thongTinDKGVService.editTTDKGV(id, user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);
+                return "GV/suaungdung";
+            }
         }
     }
     @GetMapping("/GV/suaungdung")
