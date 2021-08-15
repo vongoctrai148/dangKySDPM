@@ -33,6 +33,7 @@
             </c:forEach>
         </select>
     </div>
+    ${message}
     <div class="form-group">
         <label>Chọn máy:</label>
         <select class="form-control" id ="maytinhId" name="maytinh" style="display: inline; width: 20%; margin-left: 2%">

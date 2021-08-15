@@ -77,7 +77,7 @@ public class DKPM_GV_Controller {
         }
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
         if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
-            model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc có trong TKB");
+            model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc có trong TKB, bấm back để đăng ký lại!");
             return "GV/themdkpm";
         }
         else {
@@ -135,7 +135,7 @@ public class DKPM_GV_Controller {
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
         if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), ngaysd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
             model.addAttribute("message", "Phòng đã có giáo viên mượn hoặc trùng TKB");
-            return "redirect:/GV/suadkpm/"+id;
+            return "GV/suadkpm";
         }
         else {
             thongTinDKGVService.editTTDKGV(id, user, phongMay, lopHocPhan, date, ngaysd, start, end, mucdich.toString(), soluongsv, 0);

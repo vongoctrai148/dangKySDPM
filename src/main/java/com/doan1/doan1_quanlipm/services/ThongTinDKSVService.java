@@ -24,6 +24,10 @@ public class ThongTinDKSVService {
     public List<ThongTinDKSV> findAllByUserName(String username){
         return thongTinDKSVRepository.findAllByUsername(username);
     }
+    @Transactional
+    public int checkTTDKSV(String maphong, String mamay, Date ngaysd, int start, int end, int ketqua){
+        return thongTinDKSVRepository.checkTTDKSV(maphong, mamay, ngaysd, start, end, ketqua);
+    }
 
 
     @Transactional

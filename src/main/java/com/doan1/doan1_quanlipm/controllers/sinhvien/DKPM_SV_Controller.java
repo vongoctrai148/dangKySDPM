@@ -70,13 +70,18 @@ public class DKPM_SV_Controller {
         PhongMay phongMay = phongMayService.findByMaPhong((String) session.getAttribute("phongmayId"));
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
         MayTinh mayTinh = mayTinhService.findByMaMay(mamay);
-        thongTinDKSVService.themDK(user, phongMay, mayTinh, date,tgiansd, start, end , 0);
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
-            model.addAttribute("message", "Phòng đã có giáo viên đăng ký hoặc trùng TKB");
-            return "redirect:/SV/capnhatdkpm";
+        if(thongTinDKSVService.checkTTDKSV(phongMay.getMaphong(), mamay, tgiansd, end, start, 1) > 0 || thongTinDKSVService.checkTTDKSV(phongMay.getMaphong(), mamay, tgiansd, end, start, 0) > 0){
+            model.addAttribute("message", "Máy bạn chọn đã có người đăng ký! Bấm back để đăng ký lại!");
+            return "SV/themdkpm";
         }
         else {
-            return "SV/themungdung";
+            thongTinDKSVService.themDK(user, phongMay, mayTinh, date, tgiansd, start, end, 0);
+            if (thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue() + 1, end, start) > 0) {
+                model.addAttribute("message", "Phòng đã có giáo viên đăng ký hoặc trùng TKB");
+                return "redirect:/SV/capnhatdkpm";
+            } else {
+                return "SV/themungdung";
+            }
         }
     }
     @PostMapping("SV/themungdung")
@@ -121,12 +126,17 @@ public class DKPM_SV_Controller {
         PhongMay phongMay = phongMayService.findByMaPhong(maphong);
         model.addAttribute("phanmems", phanMemService.findPhanMemByMaPhong(phongMay.getMaphong()));
         MayTinh mayTinh = mayTinhService.findByMaMay(mamay);
-        thongTinDKSVService.suaDK(id, user, phongMay, mayTinh,date ,tgiansd, start, end , 0);
-        if(thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue()+1, end, start) > 0){
-            return "redirect:/SV/capnhatdkpm";
+        if(thongTinDKSVService.checkTTDKSV(phongMay.getMaphong(), mamay, tgiansd, end, start, 1) > 0 || thongTinDKSVService.checkTTDKSV(phongMay.getMaphong(), mamay, tgiansd, end, start, 0) > 0){
+            model.addAttribute("message", "Máy bạn chọn đã có người đăng ký! Bấm back để đăng ký lại!");
+            return "SV/suadkpm";
         }
         else {
-            return "SV/suaungdung";
+            thongTinDKSVService.suaDK(id, user, phongMay, mayTinh, date, tgiansd, start, end, 0);
+            if (thongTinDKGVService.checkTTDKGV(phongMay.getMaphong(), tgiansd, end, start, 1) > 0 || thoiKhoaBieuService.checkTKB(phongMay.getMaphong(), thu.getValue() + 1, end, start) > 0) {
+                return "redirect:/SV/capnhatdkpm";
+            } else {
+                return "SV/suaungdung";
+            }
         }
     }
     @GetMapping("/SV/suaungdung")

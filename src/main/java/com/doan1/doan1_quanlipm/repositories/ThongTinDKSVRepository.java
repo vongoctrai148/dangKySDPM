@@ -24,4 +24,7 @@ public interface ThongTinDKSVRepository extends JpaRepository<ThongTinDKSV, Long
     List<ThongTinDKSV> findSVMuonPhong(String maphong, Date ngaysd, int giobatdau, int ketqua);
     @Query("select tt from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.ketqua = ?2 order by tt.thoigiandk asc ")
     List<ThongTinDKSV> getSVMuonMayNQL(String maphong, int ketqua);
+
+    @Query("select count(tt) from ThongTinDKSV tt where tt.maphong.maphong = ?1 and tt.mamay.mamay = ?2 and tt.ngaysd = ?3 and tt.tutiet < ?4 and tt.dentiet > ?5 and tt.ketqua = ?6")
+    int checkTTDKSV(String maphong, String mamay, Date ngaysd, int giobatdau, int dentiet, int ketqua);
 }
